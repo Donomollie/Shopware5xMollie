@@ -15,6 +15,7 @@ services:
       volumes:
          - "db_volume:/var/lib/mysql"
          - "shop_volume:/var/www/html"
+         - "./.docker/mollie.sh:/mollie.sh"
       networks:
          - web
       environment:
@@ -22,6 +23,7 @@ services:
          - XDEBUG_ENABLED=1
          # default = latest PHP, optional = specific version
          - PHP_VERSION=7.4
+         - MOLLIE_VERSION=v2.4.0
 
 volumes:
   db_volume:
