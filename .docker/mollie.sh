@@ -15,4 +15,8 @@ then
     php bin/console cache:clear
 fi
 
+if [ -f ./MollieShopware-v2.4.0.zip ]
+then rm ./MollieShopware-v2.4.0.zip
+
+fi
 echo "[!] Mollie plugin is installed!"

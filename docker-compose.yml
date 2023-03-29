@@ -22,7 +22,7 @@ services:
          # default = 0, recommended to be OFF for frontend devs
          - XDEBUG_ENABLED=1
          # default = latest PHP, optional = specific version
-         - PHP_VERSION=8.0
+         - PHP_VERSION=7.4
          # get latest mollie version here:
          - MOLLIE_VERSION=v2.4.0
 
