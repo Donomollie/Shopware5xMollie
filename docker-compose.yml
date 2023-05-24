@@ -6,19 +6,19 @@ services:
       # use either tag "latest" or any other version like "6.1.5", ...
       build: .docker/.
       container_name: shopware
-      ports:
-         - "80:80"
-         - "3306:3306"
-         - "22:22"
-         - "8888:8888"
-         - "9999:9999"
+     # ports:
+      #   - "80:80"
+       #  - "3306:3306"
+        # - "22:22"
+         #- "8888:8888"
+         #- "9999:9999"
       volumes:
          - "db_volume:/var/lib/mysql"
          - "shop_volume:/var/www/html"
          - "./.docker/mollie.sh:/mollie.sh"
       networks:
-         - web
-         - traefik-publik
+       #  - web
+       - "traefik-public"
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.${NAME_SERVICE}.rule=Host(`${DOMAIN}`)"
@@ -44,7 +44,7 @@ volumes:
     driver: local
 
 networks:
-  web:
-    external: false
-    traefik-public:
-        name: traefik-public
+#  web:
+ #   external: false
+ traefik-public:
+    name: traefik-public
