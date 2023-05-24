@@ -18,13 +18,24 @@ services:
          - "./.docker/mollie.sh:/mollie.sh"
       networks:
          - web
+         - traefik-publik
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.${NAME_SERVICE}.rule=Host(`${DOMAIN}`)"
+        - "traefik.http.routers.${NAME_SERVICE}.entrypoints=web"
+        - "traefik.http.services.${NAME_SERVICE}.loadbalancer.server.port=80"
       environment:
-         # default = 0, recommended to be OFF for frontend devs
-         - XDEBUG_ENABLED=1
-         # default = latest PHP, optional = specific version
-         - PHP_VERSION=7.4
-         # get latest mollie version here:
-         - MOLLIE_VERSION=v2.4.0
+        PHP_VERSION: ${PHP_VERSION}
+        APACHE_DOCROOT: ${APACHE_DOCROOT}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PWD: ${MYSQL_PWD}
+        COMPOSER_VERSION: ${COMPOSER_VERSION}
+        SW_CURRENCY: ${SW_CURRENCY}
+        SW_API_ACCESS_KEY: ${SW_API_ACCESS_KEY}
+        SW_TASKS_ENABLED: ${SW_TASKS_ENABLED}
+        MOLLIE_VERSION: ${MOLLIE_VERSION}
+        DOMAIN: ${DOMAIN}
+
 
 volumes:
   db_volume:
@@ -35,3 +46,5 @@ volumes:
 networks:
   web:
     external: false
+    traefik-public:
+        name: traefik-public
